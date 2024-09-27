@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/splash_screen.dart';
 import 'package:task_manager/ui/utlis/app_colors.dart';
@@ -14,10 +15,11 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          colorSchemeSeed: AppColors.themeColor,
-          textTheme: const TextTheme(),
-          inputDecorationTheme: _inputDecorationTheme(),
-          elevatedButtonTheme: _elevatedButtonThemeData()),
+        colorSchemeSeed: AppColors.themeColor,
+        textTheme: const TextTheme(),
+        inputDecorationTheme: _inputDecorationTheme(),
+        elevatedButtonTheme: _elevatedButtonThemeData(),
+      ),
       home: const SplashScreen(),
     );
   }
@@ -41,7 +43,7 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
       fillColor: Colors.white,
       filled: true,
       hintStyle: const TextStyle(
-        fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w300
       ),
       border: _inputBorder(),
       enabledBorder: _inputBorder(),
@@ -52,6 +54,8 @@ class _TaskManagerAppState extends State<TaskManagerApp> {
 
   OutlineInputBorder _inputBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide.none, borderRadius: BorderRadius.circular(8));
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(8),
+    );
   }
 }

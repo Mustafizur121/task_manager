@@ -1,8 +1,9 @@
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/forgot_password_otp_screen.dart';
-import 'package:task_manager/ui/screens/splash_screen.dart';
 import 'package:task_manager/ui/utlis/app_colors.dart';
+import 'package:task_manager/ui/widgets/screen_background.dart';
 
 class ForgotPasswordEmailScreen extends StatefulWidget {
   const ForgotPasswordEmailScreen({super.key});
@@ -16,9 +17,9 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Screenbackground(
+      body: ScreenBackground(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -27,24 +28,20 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
               children: [
                 const SizedBox(height: 82),
                 Text(
-                  "Your Email Address",
+                  'Your Email Address',
                   style: textTheme.displaySmall
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "A 6 digit verification otp will sent your email address",
-                  style: textTheme.titleMedium?.copyWith(color: Colors.grey),
+                  'A 6 digits verification otp will be sent to your email address',
+                  style: textTheme.titleSmall?.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
                 _buildVerifyEmailForm(),
-                const SizedBox(height: 32),
+                const SizedBox(height: 48),
                 Center(
-                  child: Column(
-                    children: [
-                      _buildHaveAccountSection(),
-                    ],
-                  ),
+                  child: _buildHaveAccountSection(),
                 )
               ],
             ),
@@ -78,7 +75,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
             fontWeight: FontWeight.w600,
             fontSize: 14,
             letterSpacing: 0.5),
-        text: "Have an account? ",
+        text: "Have account? ",
         children: [
           TextSpan(
               text: 'Sign In',

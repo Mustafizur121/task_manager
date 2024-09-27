@@ -2,8 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/forgot_password_otp_screen.dart';
 import 'package:task_manager/ui/screens/sign_in_screen.dart';
-import 'package:task_manager/ui/screens/splash_screen.dart';
-import 'package:task_manager/ui/utlis/app_colors.dart';
+import 'package:task_manager/ui/widgets/screen_background.dart';
+
+import '../utlis/app_colors.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -15,12 +16,10 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme
-        .of(context)
-        .textTheme;
+    TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Screenbackground(
+      body: ScreenBackground(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -29,24 +28,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: [
                 const SizedBox(height: 82),
                 Text(
-                  "Set Password",
+                  'Set Password',
                   style: textTheme.displaySmall
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Minimum number of password should be 8 letters and character combinations",
-                  style: textTheme.titleMedium?.copyWith(color: Colors.grey),
+                  'Minimum number of password should be 8 letters',
+                  style: textTheme.titleSmall?.copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
                 _buildResetPasswordForm(),
-                const SizedBox(height: 32),
+                const SizedBox(height: 48),
                 Center(
-                  child: Column(
-                    children: [
-                      _buildHaveAccountSection(),
-                    ],
-                  ),
+                  child: _buildHaveAccountSection(),
                 )
               ],
             ),
@@ -64,7 +59,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         ),
         const SizedBox(height: 8),
         TextFormField(
-          decoration: const InputDecoration(hintText: 'Confirm password'),
+          decoration: const InputDecoration(hintText: 'Confirm Password'),
         ),
         const SizedBox(height: 24),
         ElevatedButton(
@@ -83,13 +78,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             fontWeight: FontWeight.w600,
             fontSize: 14,
             letterSpacing: 0.5),
-        text: "Have an account? ",
+        text: "Have account? ",
         children: [
           TextSpan(
               text: 'Sign In',
               style: const TextStyle(color: AppColors.themeColor),
-              recognizer: TapGestureRecognizer()
-                ..onTap = _onTapSignIn),
+              recognizer: TapGestureRecognizer()..onTap = _onTapSignIn),
         ],
       ),
     );
@@ -97,16 +91,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   void _onTapNextButton() {
     Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInScreen()),
-            (_) => false);
+      context,
+      MaterialPageRoute(builder: (context) => const SignInScreen()),
+          (_) => false,
+    );
   }
-
 
   void _onTapSignIn() {
     Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInScreen()),
-            (_) => false);
+      context,
+      MaterialPageRoute(builder: (context) => const SignInScreen()),
+          (_) => false,
+    );
   }
 }

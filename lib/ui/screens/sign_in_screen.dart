@@ -1,9 +1,10 @@
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/forgot_password_email_screen.dart';
 import 'package:task_manager/ui/screens/sign_up_screen.dart';
-import 'package:task_manager/ui/screens/splash_screen.dart';
 import 'package:task_manager/ui/utlis/app_colors.dart';
+import 'package:task_manager/ui/widgets/screen_background.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -16,18 +17,18 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Screenbackground(
+      body: ScreenBackground(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 120),
+                const SizedBox(height: 82),
                 Text(
-                  "Get Started With",
+                  'Get Started With',
                   style: textTheme.displaySmall
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
@@ -41,9 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: _onTapForgotPasswordButton,
                         child: const Text(
                           'Forgot Password?',
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
+                          style: TextStyle(color: Colors.grey),
                         ),
                       ),
                       _buildSignUpSection(),
