@@ -17,68 +17,81 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   final TextEditingController _descriptionTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _addNewTaskInProgress = false;
+  bool _shouldRefreshPreviousPage = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const TMAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 42,
-                ),
-                Text(
-                  'Add New Task',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(
-                    fontWeight: FontWeight.w600,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop){
+        if(didPop){
+          return;
+        }
+        Navigator.pop(context,_shouldRefreshPreviousPage);
+
+
+      },
+
+      child: Scaffold(
+        appBar: const TMAppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 42,
                   ),
-                ),
-                const SizedBox(height: 24),
-                TextFormField(
-                  controller: _titleTEController,
-                  decoration: const InputDecoration(hintText: 'Title'),
-                  validator: (String? value) {
-                    if (value
-                        ?.trim()
-                        .isEmpty ?? true) {
-                      return 'Enter a value';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  controller: _descriptionTEController,
-                  maxLines: 5,
-                  decoration: const InputDecoration(hintText: 'Description'),
-                  validator: (String? value) {
-                    if (value
-                        ?.trim()
-                        .isEmpty ?? true) {
-                      return 'Enter a value';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                Visibility(
-                  visible: !_addNewTaskInProgress,
-                  replacement: const CircularProgressIndicator(),
-                  child: ElevatedButton(
-                    onPressed: _onTapSubmitButton,
-                    child: const Icon(Icons.arrow_circle_right_outlined),
+                  Text(
+                    'Add New Task',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 24),
+                  TextFormField(
+                    controller: _titleTEController,
+                    decoration: const InputDecoration(hintText: 'Title'),
+                    validator: (String? value) {
+                      if (value
+                          ?.trim()
+                          .isEmpty ?? true) {
+                        return 'Enter a value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: _descriptionTEController,
+                    maxLines: 5,
+                    decoration: const InputDecoration(hintText: 'Description'),
+                    validator: (String? value) {
+                      if (value
+                          ?.trim()
+                          .isEmpty ?? true) {
+                        return 'Enter a value';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  Visibility(
+                    visible: !_addNewTaskInProgress,
+                    replacement: const CircularProgressIndicator(),
+                    child: ElevatedButton(
+                      onPressed: _onTapSubmitButton,
+                      child: const Icon(Icons.arrow_circle_right_outlined),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -106,6 +119,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     setState(() {});
 
     if (response.isSuccess) {
+      _shouldRefreshPreviousPage = true;
       _clearTextFields();
       showSnackBarMesssage(context, 'New task added!');
     } else {
